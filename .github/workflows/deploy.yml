@@ -27,7 +27,7 @@ jobs:
       - run: npx ng build --configuration production --base-href /feliz-cumple-marta/
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/feliz-cumple-marta
+          path: dist/feliz-cumple-marta/browser
 
   deploy:
     needs: build
