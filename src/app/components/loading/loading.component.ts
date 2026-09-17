@@ -1,11 +1,21 @@
-import { Component, EventEmitter, OnDestroy, OnInit, Output, signal } from '@angular/core';
+import { Component, EventEmitter, Output, computed, signal } from '@angular/core';
 import { APP_CONFIG } from '../../config';
 
 const MENSAJES = [
-  'Algo especial se está encendiendo...',
-  'Un poquito más...',
-  'Ya casi está...',
+  'Toca el corazón',
+  'Otra vez',
+  'Algo se está encendiendo...',
+  'Sigue, que esto se calienta',
+  'Un poquito más',
+  'No pares ahora',
+  '¡La última vez!',
 ];
+
+const TOQUES_NECESARIOS = MENSAJES.length - 1;
+
+interface Ripple {
+  id: number;
+}
 
 @Component({
   selector: 'app-loading',
@@ -14,38 +24,35 @@ const MENSAJES = [
   templateUrl: './loading.component.html',
   styleUrl: './loading.component.css',
 })
-export class LoadingComponent implements OnInit, OnDestroy {
+export class LoadingComponent {
   @Output() finished = new EventEmitter<void>();
 
   readonly nombre = APP_CONFIG.nombre;
-  readonly progress = signal(0);
-  readonly mensaje = signal(MENSAJES[0]);
+  readonly toques = signal(0);
   readonly leaving = signal(false);
+  readonly ripples = signal<Ripple[]>([]);
 
-  private intervalId?: ReturnType<typeof setInterval>;
+  readonly progress = computed(() => Math.round((this.toques() / TOQUES_NECESARIOS) * 100));
+  readonly mensaje = computed(() => MENSAJES[this.toques()]);
 
-  ngOnInit(): void {
-    this.intervalId = setInterval(() => {
-      const next = Math.min(100, this.progress() + Math.round(2 + Math.random() * 5));
-      this.progress.set(next);
+  private rippleId = 0;
 
-      if (next < 40) {
-        this.mensaje.set(MENSAJES[0]);
-      } else if (next < 80) {
-        this.mensaje.set(MENSAJES[1]);
-      } else {
-        this.mensaje.set(MENSAJES[2]);
-      }
+  onTap(): void {
+    if (this.leaving() || this.toques() >= TOQUES_NECESARIOS) {
+      return;
+    }
 
-      if (next >= 100) {
-        clearInterval(this.intervalId);
-        this.leaving.set(true);
-        setTimeout(() => this.finished.emit(), 500);
-      }
-    }, 90);
-  }
+    this.toques.update((t) => t + 1);
 
-  ngOnDestroy(): void {
-    clearInterval(this.intervalId);
+    const id = this.rippleId++;
+    this.ripples.update((r) => [...r, { id }]);
+    setTimeout(() => {
+      this.ripples.update((r) => r.filter((x) => x.id !== id));
+    }, 700);
+
+    if (this.toques() === TOQUES_NECESARIOS) {
+      this.leaving.set(true);
+      setTimeout(() => this.finished.emit(), 700);
+    }
   }
 }

@@ -23,7 +23,17 @@
   <div class="wave">〜</div>
 
   <button class="envelope" type="button" (click)="onDescubrir()">
-    <span class="seal">♥</span>
-    <span class="label">Descúbrela</span>
+    <span class="seal">Descúbrela</span>
   </button>
+
+  <div class="confetti-layer">
+    @for (c of confetti(); track c.id) {
+      <span
+        class="confetti-piece"
+        [style.left.%]="c.left"
+        [style.animation-delay.s]="c.delay"
+        [style.background]="c.color"
+      ></span>
+    }
+  </div>
 </section>
