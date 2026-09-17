@@ -1,0 +1,63 @@
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  background: radial-gradient(circle at 50% 30%, #fbf5e9 0%, var(--cream) 70%);
+  z-index: 100;
+  transition: opacity 0.5s ease;
+}
+
+.loading-screen.leaving {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.heart {
+  color: var(--terracotta);
+  animation: pulse 1.1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.18); }
+}
+
+.name {
+  font-style: italic;
+  font-size: 2.6rem;
+  color: var(--terracotta-dark);
+  letter-spacing: 0.02em;
+}
+
+.message {
+  margin: 0;
+  color: var(--muted);
+  font-size: 1rem;
+  min-height: 1.4em;
+}
+
+.progress-track {
+  width: min(220px, 60vw);
+  height: 6px;
+  border-radius: 999px;
+  background: var(--paper-dark);
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--terracotta), #d98058);
+  transition: width 0.15s ease-out;
+}
+
+.progress-label {
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.05em;
+}

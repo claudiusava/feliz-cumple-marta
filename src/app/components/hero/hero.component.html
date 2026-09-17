@@ -1,0 +1,29 @@
+<section class="hero">
+  <p class="date">{{ fecha }}</p>
+  <h1 class="headline">{{ frase }}</h1>
+
+  <div class="polaroid">
+    <div class="photo-frame">
+      @for (foto of fotos; track foto; let i = $index) {
+        <img [src]="foto" alt="Foto" class="photo" [class.active]="i === activeIndex()" />
+      }
+    </div>
+    <div class="decor-row">
+      <span class="sparkle">✳</span>
+      <span class="dots">
+        @for (foto of fotos; track foto; let i = $index) {
+          <span class="dot" [class.active]="i === activeIndex()"></span>
+        }
+      </span>
+      <span class="sparkle">✳</span>
+    </div>
+    <div class="bunting">🎈 🎉 🎈</div>
+  </div>
+
+  <div class="wave">〜</div>
+
+  <button class="envelope" type="button" (click)="onDescubrir()">
+    <span class="seal">♥</span>
+    <span class="label">Descúbrela</span>
+  </button>
+</section>

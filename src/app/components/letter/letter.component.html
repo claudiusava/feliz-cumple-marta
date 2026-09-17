@@ -1,0 +1,60 @@
+<section class="letter-section">
+  <article class="parchment">
+    <div class="icon-row">
+      <span>🎈</span>
+      <span>❤</span>
+      <span>🎈</span>
+    </div>
+
+    <p>Hay personas que llegan y lo cambian todo.</p>
+    <p>
+      Contigo entendí que no hace falta buscar la felicidad, porque tú la
+      traes contigo a cada momento.
+    </p>
+    <p>
+      Hoy celebro tu risa, tu forma de mirar el mundo y esa luz que enciendes
+      en todo lo que tocas.
+    </p>
+    <p>
+      Que la vida te siga regalando motivos para sonreír, porque no hay nada
+      en este mundo tan especial como {{ nombre }}.
+    </p>
+
+    <p class="closing">
+      Cada año tuyo es un capítulo nuevo de nuestra historia, y pienso estar
+      en todos ellos, contigo, celebrándote.
+    </p>
+  </article>
+
+  <div class="toast-row">
+    <span class="glasses">🥂</span>
+    <p class="tagline">Por muchos cumpleaños más juntos</p>
+  </div>
+
+  <div class="final-photo">
+    <img src="assets/images/foto-final.svg" alt="Foto de los dos" />
+  </div>
+
+  <p class="thanks">Gracias por compartir tu vida conmigo, {{ nombre }}.</p>
+
+  <button class="save-button" type="button" (click)="guardarMomento()">
+    Guardar este momento ❤
+  </button>
+
+  @if (guardado()) {
+    <p class="saved-msg">¡Momento guardado con cariño! 💛</p>
+  }
+
+  <footer class="footer">Hecho con amor para {{ nombre }} 🤍</footer>
+
+  <div class="hearts-layer">
+    @for (h of hearts(); track h.id) {
+      <span
+        class="floating-heart"
+        [style.left.%]="h.left"
+        [style.animation-delay.s]="h.delay"
+        >❤</span
+      >
+    }
+  </div>
+</section>

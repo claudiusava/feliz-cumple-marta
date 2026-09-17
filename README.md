@@ -1,27 +1,34 @@
-# FelizCumpleMarta
+# Feliz Cumpleaños, Marta 💛
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.17.
+Web sorpresa de cumpleaños hecha con Angular: pantalla de carga, una portada
+con una polaroid de fotos, y una carta que se revela al abrir el sobre.
 
-## Development server
+Se publica automáticamente en GitHub Pages en cada push a `main`, en:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+https://claudiusava.github.io/feliz-cumple-marta/
 
-## Code scaffolding
+## Personalizar
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Todo lo editable está centralizado, no hace falta tocar el resto del código:
 
-## Build
+- **Nombre, fecha y frase de portada**: [`src/app/config.ts`](src/app/config.ts).
+- **Fotos**: sustituye los archivos en `src/assets/images/` (`foto-1.svg`,
+  `foto-2.svg`, `foto-3.svg` para la polaroid, `foto-final.svg` para la foto
+  final) por vuestras fotos reales. Puedes usar `.jpg`/`.png`: solo cambia la
+  extensión en las rutas de `hero.component.ts` y `letter.component.html`.
+- **Texto de la carta**: [`src/app/components/letter/letter.component.html`](src/app/components/letter/letter.component.html).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Desarrollo local
 
-## Running unit tests
+```bash
+npm install
+npm start
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Abre `http://localhost:4200`.
 
-## Running end-to-end tests
+## Despliegue
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+El workflow [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml)
+compila y publica en GitHub Pages automáticamente en cada push a `main`. No
+hace falta hacer nada manualmente.

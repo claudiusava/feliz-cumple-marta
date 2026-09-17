@@ -1,0 +1,16 @@
+<div class="loading-screen" [class.leaving]="leaving()">
+  <div class="heart">
+    <svg viewBox="0 0 32 29" width="48" height="44">
+      <path d="M16 28C16 28 1 18.5 1 9.5C1 4.3 5 1 9.3 1C12.3 1 14.8 2.7 16 5.4C17.2 2.7 19.7 1 22.7 1C27 1 31 4.3 31 9.5C31 18.5 16 28 16 28Z"
+            fill="currentColor" />
+    </svg>
+  </div>
+
+  <h1 class="name">{{ nombre }}</h1>
+  <p class="message">{{ mensaje() }}</p>
+
+  <div class="progress-track">
+    <div class="progress-fill" [style.width.%]="progress()"></div>
+  </div>
+  <span class="progress-label">{{ progress() }}%</span>
+</div>
